@@ -1,0 +1,52 @@
+                                              ################# Terraform  ###########
+
+
+aws configure -- pass the aws access key ID and secrect key
+
+terraform init -- to initialize the terraform and need to run this in a path where main.tf file locates
+
+terraform plan -- before creating it shows what exact our plan is going to be
+
+# In terraform there are four phases:
+  a.terraform init
+  b.terraform plan
+  c.terraform apply
+  d.terraform destroy
+  
+# Variables
+ a.input variables
+ b.output variables
+  
+while trying to provision the aws infrastructure we have to write the provider and resource etc 
+we do not need to hardcore the values in the main.tf instead that we can provide the values in the terraform.tfvars or any other name like dev.tfvars ( while running the terraform apply command need to pass the file name ) and we can give all varibles in a saperate file called variables so that everything will be in an organized way and easy to access for the devops team to modify.
+
+# terraform state file:
+
+terraform state file is the heart of the terraform it will store all the information that it has created the infrastructure
+ex: ec2 instance,vpc etc and it stores the sensitive info like github username and passwords etc..
+ 
+# aws_s3 bucket role in terraform state file:-
+
+1. when we use terraform modules from the VSC (version control systems like github ) so in order to hide provide security to state file we need to configure backend ( aws-s3 storage ) in the terraform project so that the state file will be stored in the s3 then it won't visible on the local machine by using s3 storage we can mangae security for the state file.
+
+2. to configure above step we need to write terraform code in an backend.tf file ( check official doc ...terraform.io/s3/backend configuration)
+
+terraform show -- this command helps to show the existence of terraform state file
+
+terraform.lockfile:
+
+lockfile is a mechanism uses in the software development to lock the specific versions of the dependincies to ensure that everyone working on a project is using the same set of dependencies 
+
+For terraform lock file is for maintaing the specfic versions of the terraform itself which makes the team of devops to work on the same versions of the terraform and its providers and reduces the risk of uexpected issues arising from the different versions
+
+Secret information management system:
+
+1. How to integrage terraform with Hasihicorp valut to mangae sensitive data.
+
+Store sensitive data in a secret management system. A secret management system is a dedicated system for storing sensitive data, such as passwords, API keys, and SSH keys. Terraform can be configured to read secrets from a secret management system, such as HashiCorp Vault or AWS Secrets Manager.
+
+# terraform module:
+
+In terraform a module is a collection of terraform files. using tf modules we can reuse the tf code and which helps us to organise the tf code in a better way.
+* root module is the default module and child module is the custome module
+
